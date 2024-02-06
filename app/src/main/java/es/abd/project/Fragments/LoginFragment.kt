@@ -38,13 +38,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
         binding = LoginFragmentBinding.inflate(inflater, container, false)
 
         binding.logBtnLogFragment.setOnClickListener(this)
+        binding.RegBtnLogFragment.setOnClickListener(this)
 
         return binding.root
 
     }
 
     override fun onClick(v: View) {
-
         when(v.id){
             R.id.logBtnLogFragment -> {
 
