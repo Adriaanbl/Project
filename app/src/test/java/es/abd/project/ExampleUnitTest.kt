@@ -1,4 +1,4 @@
-package es.abd.myapplication
+package es.abd.project
 
 import org.junit.Test
 

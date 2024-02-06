@@ -1,14 +1,15 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "es.abd.myapplication"
-    compileSdk = 33
+    namespace = "es.abd.project"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "es.abd.myapplication"
+        applicationId = "es.abd.project"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -33,9 +34,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
+
 }
 
 dependencies {
+
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

@@ -2,4 +2,10 @@
     <string name="app_name">Project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="login_btn">LOGIN</string>
+    <string name="mail">Mail</string>
+    <string name="password">Password</string>
+    <string name="register">REGISTER</string>
+    <string name="registerView">REGISTER</string>
 </resources>
