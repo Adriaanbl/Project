@@ -9,10 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import es.abd.project.Fragments.LoginFragment
 import es.abd.project.Fragments.RegisterFragment
+import es.abd.project.Fragments.ResetPassFragment
 import es.abd.project.R
 import es.abd.project.databinding.LoginActivityBinding
 
-class LoginActivity : AppCompatActivity(), LoginFragment.LoginFragmentListener, RegisterFragment.RegisterFragmentListener {
+class LoginActivity : AppCompatActivity(),
+    LoginFragment.LoginFragmentListener,
+    RegisterFragment.RegisterFragmentListener,
+    ResetPassFragment.ResetPassFragmentListener {
 
     private lateinit var binding: LoginActivityBinding
 
@@ -33,8 +37,16 @@ class LoginActivity : AppCompatActivity(), LoginFragment.LoginFragmentListener, 
         replaceFragment(RegisterFragment())
     }
 
+    override fun onForgotPassClick() {
+        replaceFragment(ResetPassFragment())
+    }
+
     override fun onRegistered() {
         onLogged()
+    }
+
+    override fun onRecoveryPassMailSent() {
+        onBackPressedDispatcher.onBackPressed()
     }
 
     private fun replaceFragment(fragment: Fragment){

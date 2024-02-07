@@ -39,6 +39,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         binding.logBtnLogFragment.setOnClickListener(this)
         binding.RegBtnLogFragment.setOnClickListener(this)
+        binding.forgotTxt.setOnClickListener(this)
 
         return binding.root
 
@@ -71,6 +72,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 mListener.onRegisterBtnClick()
             }
 
+            R.id.forgotTxt -> {
+                mListener.onForgotPassClick()
+            }
+
         }
 
     }
@@ -78,6 +83,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     interface LoginFragmentListener{
         fun onLogged()
         fun onRegisterBtnClick()
-
+        fun onForgotPassClick()
     }
 }

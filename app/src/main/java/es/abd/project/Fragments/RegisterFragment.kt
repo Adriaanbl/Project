@@ -28,7 +28,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
         if(context is RegisterFragmentListener){
             mListener = context
         }else{
-            throw Exception("LoginFragmentListener exception")
+            throw Exception("RegisterFragmentListener exception")
         }
     }
     override fun onCreateView(

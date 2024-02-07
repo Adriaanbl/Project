@@ -1,32 +1,35 @@
 package es.abd.project.Fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import es.abd.project.R
+import es.abd.project.Resources.AuthManager
+import es.abd.project.databinding.LoginFragmentBinding
+import es.abd.project.databinding.ResetPassFragmentBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ResetPassFragment : Fragment(), View.OnClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ResetPassFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ResetPassFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: ResetPassFragmentBinding
+    private lateinit var mListener: ResetPassFragmentListener
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val authManager: AuthManager by lazy { AuthManager() }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if(context is ResetPassFragmentListener){
+            mListener = context
+        }else{
+            throw Exception("ResetPassFragmentListener exception")
         }
     }
 
@@ -34,27 +37,40 @@ class ResetPassFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.reset_pass_fragment, container, false)
+        binding = ResetPassFragmentBinding.inflate(inflater, container, false)
+
+        binding.btnSendMail.setOnClickListener(this)
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ResetPassFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ResetPassFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btnSendMail -> {
+                val email = binding.etMail.text.toString()
+
+                if (!email.isNullOrBlank()) {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val mailSent = authManager.resetPassword(email)
+                        withContext(Dispatchers.Main) {
+                            if (mailSent) {
+                                Toast.makeText(requireContext(), "Mail sent", Toast.LENGTH_SHORT).show()
+                                mListener.onRecoveryPassMailSent()
+                            } else {//ERROR
+                                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "No email", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
     }
+
+    interface ResetPassFragmentListener{
+        fun onRecoveryPassMailSent()
+    }
+
 }

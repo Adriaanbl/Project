@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/retrofitNavItem"
+        android:enabled="true"
+        android:icon="@drawable/retrofit_ic"
+        android:title="@string/api"/>
+    <item
+        android:id="@+id/chatNavItem"
+        android:enabled="true"
+        android:icon="@drawable/chat_ic"
+        android:title="@string/chat"/>
+    <item
+        android:id="@+id/multimediaNavItem"
+        android:enabled="true"
+        android:icon="@drawable/cache_ic"
+        android:title="@string/multimedia"/>
+
+</menu>
+
