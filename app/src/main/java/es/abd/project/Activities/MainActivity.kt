@@ -2,6 +2,7 @@ package es.abd.project.Activities
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,19 +14,21 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.google.android.material.navigation.NavigationBarView
-import com.google.firebase.Firebase
 import es.abd.project.Fragments.ChatFragment
 import es.abd.project.Fragments.MultimediaFragment
 import es.abd.project.Fragments.RetrofitFragment
 import es.abd.project.R
-import es.abd.project.Resources.AuthManager
+import es.abd.project.FirebaseUtils.AuthManager
 import es.abd.project.databinding.MainActivityBinding
-import es.abd.project.databinding.SettingsActivityBinding
 
-class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, MultimediaFragment.fragmentMultimediaListener {
 
     private lateinit var binding: MainActivityBinding
     private val auth = AuthManager()
+
+
+    private lateinit var audio: MediaPlayer
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +112,24 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             addToBackStack(null)
             setReorderingAllowed(true)
         }
+    }
+
+    override fun onPlayAudioBtnClicked() {
+        audio = MediaPlayer.create(this, R.raw.poke_theme)
+        audio.start()
+    }
+
+    override fun onPauseAudioBtnClicked() {
+        if (audio.isPlaying) {
+            audio.pause()
+        }else{
+            audio.start()
+        }
+    }
+
+    override fun onStopAudioBtnClicked() {
+        audio.stop()
+        vibrateDevice()
     }
 
 }

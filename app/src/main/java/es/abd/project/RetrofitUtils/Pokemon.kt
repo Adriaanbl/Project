@@ -1,4 +1,4 @@
-package es.abd.project.Resources
+package es.abd.project.RetrofitUtils
 
 data class Pokemon(
     val name: String,

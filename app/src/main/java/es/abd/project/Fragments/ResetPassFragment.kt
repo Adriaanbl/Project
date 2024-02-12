@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import es.abd.project.R
-import es.abd.project.Resources.AuthManager
-import es.abd.project.databinding.LoginFragmentBinding
+import es.abd.project.FirebaseUtils.AuthManager
 import es.abd.project.databinding.ResetPassFragmentBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

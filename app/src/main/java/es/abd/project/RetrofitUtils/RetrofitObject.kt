@@ -1,4 +1,4 @@
-package es.abd.project.Resources
+package es.abd.project.RetrofitUtils
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

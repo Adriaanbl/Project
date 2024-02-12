@@ -1,60 +1,91 @@
 package es.abd.project.Fragments
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import es.abd.project.R
+import es.abd.project.databinding.MultimediaFragmentBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class MultimediaFragment : Fragment(),View.OnClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MultimediaFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MultimediaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: MultimediaFragmentBinding
+    private var listener : fragmentMultimediaListener? = null
+    val packageName = "es.abd.project"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is fragmentMultimediaListener){
+            listener = context
+        }else {
+            throw Exception("EXCEPPCION")
         }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.multimedia_fragment, container, false)
+        binding = MultimediaFragmentBinding.inflate(inflater, container, false)
+
+        binding.playBtn.setOnClickListener(this)
+        binding.pauseBtn.setOnClickListener(this)
+        binding.stopBtn.setOnClickListener(this)
+
+        binding.loadBtn.setOnClickListener(this)
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MultimediaFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MultimediaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onClick(v: View) {
+        when(v.id){
+
+            R.id.playBtn -> { listener?.onPlayAudioBtnClicked() }
+            R.id.pauseBtn -> { listener?.onPauseAudioBtnClicked() }
+            R.id.stopBtn -> { listener?.onStopAudioBtnClicked() }
+
+            R.id.loadBtn -> {
+
+                var video = getVideo(binding.videoInput.text.toString())
+
+                binding.videoView.setVideoURI(
+                    Uri.parse("android.resource://$packageName/" + video)
+                )
+
+                val mediaController = MediaController(requireContext())
+                mediaController.setAnchorView(binding.videoView)
+                mediaController.setMediaPlayer(binding.videoView)
+                binding.videoView.setMediaController(mediaController)
+
+                playVideo()
+
             }
+        }
+
     }
+
+    fun getVideo(video: String): Int{
+        return when(video){
+            "video1" -> R.raw.video1
+            "video2" -> R.raw.video2
+            else -> 0
+        }
+    }
+
+    private fun playVideo() {
+        binding.videoView.start()
+    }
+
+    interface fragmentMultimediaListener{
+        fun onPlayAudioBtnClicked()
+        fun onPauseAudioBtnClicked()
+        fun onStopAudioBtnClicked()
+    }
+
 }

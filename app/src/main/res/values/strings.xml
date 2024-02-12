@@ -35,4 +35,6 @@
     <string name="multimedia">Multimedia</string>
     <string name="nom_pokemon">Nom Pokemon</string>
     <string name="url_pokemon">URL Pokemon</string>
+    <string name="video_name">Video name</string>
+    <string name="load">LOAD</string>
 </resources>

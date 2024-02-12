@@ -2,13 +2,19 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Project" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorPrimary">@color/green</item>
         <item name="colorSecondary">@color/purple</item>
 
     </style>
 
     <style name="Theme.Project" parent="Theme.Material3.DayNight.NoActionBar" >
-        <item name="colorPrimary">#3F51B5</item>
-        <item name="colorSecondary">@color/purple</item>
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorSecondary">@color/green</item>
     </style>
+
+    <style name="MenuStyle">
+        <item name="android:background">@drawable/fondosett</item>
+    </style>
+
+
 </resources>

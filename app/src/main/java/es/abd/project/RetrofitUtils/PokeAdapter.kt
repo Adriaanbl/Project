@@ -1,9 +1,10 @@
-package es.abd.project.Resources
+package es.abd.project.RetrofitUtils
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import es.abd.project.R
@@ -21,6 +22,13 @@ class PokeAdapter (private val pokemons: MutableList<Pokemon>)
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val item = pokemons[position]
         holder.bindItem(item)
+
+        holder.itemView.setOnClickListener {
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.url))
+            holder.itemView.context.startActivity(intent)
+        }
+
     }
 
     class PokemonViewHolder(view: View): RecyclerView.ViewHolder(view) {

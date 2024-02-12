@@ -1,4 +1,4 @@
-package es.abd.project.Resources
+package es.abd.project.FirebaseUtils
 
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
