@@ -33,4 +33,6 @@
     <string name="chat">Chat</string>
     <string name="cache">Cache</string>
     <string name="multimedia">Multimedia</string>
+    <string name="nom_pokemon">Nom Pokemon</string>
+    <string name="url_pokemon">URL Pokemon</string>
 </resources>
