@@ -9,6 +9,6 @@ import es.abd.project.RetrofitUtils.Pokemon
     version = 1
 )
 abstract class AppDB : RoomDatabase() {
-    abstract fun dogDao() : PokemonDao
+    abstract fun pokemonDao() : PokemonDao
 
 }

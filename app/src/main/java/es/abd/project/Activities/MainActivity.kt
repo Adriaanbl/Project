@@ -1,5 +1,6 @@
 package es.abd.project.Activities
 
+import RetrofitFragment
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
@@ -16,7 +17,6 @@ import androidx.fragment.app.commit
 import com.google.android.material.navigation.NavigationBarView
 import es.abd.project.Fragments.ChatFragment
 import es.abd.project.Fragments.MultimediaFragment
-import es.abd.project.Fragments.RetrofitFragment
 import es.abd.project.R
 import es.abd.project.FirebaseUtils.AuthManager
 import es.abd.project.databinding.MainActivityBinding
