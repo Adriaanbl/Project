@@ -37,4 +37,7 @@
     <string name="url_pokemon">URL Pokemon</string>
     <string name="video_name">Video name</string>
     <string name="load">LOAD</string>
+    <string name="text">Text</string>
+    <string name="user">User</string>
+    <string name="time">time</string>
 </resources>

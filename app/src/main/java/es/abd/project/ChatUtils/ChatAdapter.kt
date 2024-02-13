@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import es.abd.project.R
 
 class ChatAdapter(private val context: Context,
-                   private val items: MutableList<Message>,
-                   private val mListener: NotesAdapterListener
+                   private val items: MutableList<Message>
 ) :
-    RecyclerView.Adapter<NotesAdapter.ViewHolder>(){
+    RecyclerView.Adapter<ChatAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.note_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.message_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -26,24 +25,21 @@ class ChatAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.bindItem(item)
-        holder.itemView.setOnClickListener { mListener.onNoteClick(item) }
-        holder.itemView.setOnLongClickListener { mListener.onNoteLongClick(item) }
     }
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        private val tvTitle: TextView = view.findViewById(R.id.tvTitle)
-        private val tvContent: TextView = view.findViewById(R.id.tvContent)
+        private val msgUser: TextView = view.findViewById(R.id.message_user_txt)
+        private val msgTime: TextView = view.findViewById(R.id.message_time_txt)
+        private val msgText: TextView = view.findViewById(R.id.message_txt)
 
-        fun bindItem(item: Note){
-            tvTitle.text = item.title
-            tvContent.text = item.content
+        fun bindItem(item: Message){
+            msgUser.text = item.name
+            msgTime.text = item.time.toString()
+            msgText.text = item.text
         }
     }
 
-    interface NotesAdapterListener{
-        fun onNoteClick(note: Note)
-        fun onNoteLongClick(note: Note): Boolean
-    }
+  
 }
 
