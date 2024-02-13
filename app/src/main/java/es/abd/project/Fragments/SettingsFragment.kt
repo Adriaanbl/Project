@@ -1,12 +1,17 @@
 package es.abd.project.Fragments
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Message
+import android.view.View
 import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import es.abd.project.FirebaseUtils.AuthManager
 import es.abd.project.R
+import es.abd.project.databinding.MessageItemBinding
+import es.abd.project.databinding.SettingsFragmentBinding
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -14,20 +19,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private val authManager: AuthManager by lazy { AuthManager() }
     private val user = authManager.getCurrentUser()
 
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
         val usernamePreference = findPreference<EditTextPreference>("username")
 
         usernamePreference?.setOnPreferenceChangeListener { preference, newValue ->
-            // Obtener el nuevo valor del EditTextPreference
+
             val newName = newValue.toString()
 
             emailUpdate(newName)
             usernameChange(newName)
             true
         }
+
+
+
     }
 
     fun usernameChange(name: String){

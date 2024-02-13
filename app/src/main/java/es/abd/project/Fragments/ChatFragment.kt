@@ -1,6 +1,7 @@
 package es.abd.project.Fragments
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import es.abd.project.ChatUtils.ChatAdapter
 import es.abd.project.FirebaseUtils.FirestoreManager
+import es.abd.project.R
 import es.abd.project.databinding.ChatFragmentBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,11 +36,16 @@ class ChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = ChatFragmentBinding.inflate(inflater, container, false)
+        val prefs = requireContext().getSharedPreferences("es.abd.project_preferences", Context.MODE_PRIVATE)
+
+        val colorChat = prefs.getString("color", "")
+        val colorc = Color.parseColor(colorChat)
+        requireActivity().findViewById<View>(R.id.chat_item)?.setBackgroundColor(colorc)
 
         setRecyclerView()
 
-        val prefs = requireContext().getSharedPreferences("es.abd.project_preferences", Context.MODE_PRIVATE)
         val user = prefs.getString("username","")
+
 
 
         binding.messageIpnut.setOnEditorActionListener{ _, actionId, event ->
@@ -63,6 +70,7 @@ class ChatFragment : Fragment() {
 
         return binding.root
     }
+
 
     private fun setRecyclerView(){
         messages = mutableListOf()
