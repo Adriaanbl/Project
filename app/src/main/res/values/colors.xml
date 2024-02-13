@@ -5,4 +5,5 @@
     <color name="purple">#FF673AB7</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="green">#59A65C</color>
+    <color name="semiTransparentWhite">#8AFFFFFF</color>
 </resources>

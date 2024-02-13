@@ -25,17 +25,19 @@ class ChatAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.bindItem(item)
+
     }
 
-
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
+
+
         private val msgUser: TextView = view.findViewById(R.id.message_user_txt)
         private val msgTime: TextView = view.findViewById(R.id.message_time_txt)
         private val msgText: TextView = view.findViewById(R.id.message_txt)
 
         fun bindItem(item: Message){
             msgUser.text = item.name
-            msgTime.text = item.time.toString()
+            msgTime.text = item.time.toDate().toString()
             msgText.text = item.text
         }
     }

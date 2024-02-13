@@ -1,9 +1,9 @@
 package es.abd.project.ChatUtils
 
-import java.util.Date
+import java.sql.Timestamp
 
 data class Message(
     val name: String,
     val text: String,
-    val time: Long = Date().time
+    val time: com.google.firebase.Timestamp
 )
